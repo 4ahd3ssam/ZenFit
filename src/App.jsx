@@ -7,9 +7,12 @@ import { Workout } from './pages/Workout';
 import { HabitTracker } from './pages/HabitTracker';
 import { Profile } from './pages/Profile';
 import { ProtectedRoute } from './features/auth/ProtectedRoute';
+import { useTheme } from './hooks/useTheme';
 
 
 function App() {
+  useTheme();
+
   return (
     <>
       <BrowserRouter>
