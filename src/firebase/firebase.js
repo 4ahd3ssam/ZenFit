@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
-
+import { getAuth, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { useAuthStore } from "../store/authStore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfrTOPzSuv_xwKnvXmSgQz0VokPTLmbaw",
@@ -17,3 +18,22 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
+export const db = getFirestore(app);
+export const authListener = () => {
+  onAuthStateChanged(auth, async (firebaseUser) => {
+    if (firebaseUser) {
+      const ref = doc(db, "users", firebaseUser.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        useAuthStore.setState({
+          user: snap.data(),
+        });
+      }
+    } else {
+      useAuthStore.setState({
+        user: null,
+      });
+    }
+  });
+};
