@@ -3,3 +3,9 @@
 @source "../.flowbite-react/class-list.json";
 
 @config "../tailwind.config.js";
+
+
+@theme {
+  --font-space: "Space Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
