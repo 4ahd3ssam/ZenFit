@@ -8,10 +8,15 @@ import { HabitTracker } from './pages/HabitTracker';
 import { Profile } from './pages/Profile';
 import { ProtectedRoute } from './features/auth/ProtectedRoute';
 import { useTheme } from './hooks/useTheme';
+import { useEffect } from 'react';
+import { authListener } from './firebase/firebase';
 
 
 function App() {
   useTheme();
+  useEffect(() => {
+    authListener();
+  }, []);
 
   return (
     <>
