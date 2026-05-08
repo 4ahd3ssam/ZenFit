@@ -1,11 +1,9 @@
-export const PageLayout = ({ children }) => {
+export const PageLayout = ({ className, children }) => {
     return (
-        <main className="pt-20 pb-8 bg-gray-50 dark:bg-zinc-950 min-h-screen transition-all duration-200 flex items-center justify-center">
+        <main className={`transition-all duration-200 flex items-center justify-center ${className || ''}`}>
             <div className="container mx-auto px-2 sm:px-4">
                 {children}
             </div>
         </main>
     )
-
-
 }

@@ -16,7 +16,7 @@ import { auth, googleProvider, db } from "../firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { ToastMessage } from "../components/common/ToastMessage";
 import { FavIcon } from "../components/common/FavIcon";
-
+import { motion } from "framer-motion";
 
 
 export const Login = () => {
@@ -115,8 +115,12 @@ export const Login = () => {
     return (
         <>
             <NavigationBar />
-            <PageLayout>
-                <div className="flex items-center justify-center py-3">
+            <PageLayout className={"pt-[64.8px] min-h-screen bg-gray-50 dark:bg-zinc-950 "}>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="flex items-center justify-center py-3">
                     <Card className="px-10 py-8">
                         <div className="mb-6 flex items-center gap-3">
                             <FavIcon />
@@ -193,7 +197,7 @@ export const Login = () => {
                             </Link>
                         </p>
                     </Card>
-                </div>
+                </motion.div>
                 {showToast && (
                     <ToastMessage message={toastMessage} />
                 )}
