@@ -21,7 +21,6 @@ export const NavigationBar = () => {
             <Navbar
                 rounded
                 className="fixed top-0 left-0 right-0 z-50
-            
                 bg-gradient-to-r from-gray-100 via-white to-gray-100 
                 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950
                 border-b border-gray-200 dark:border-zinc-800 
@@ -34,12 +33,13 @@ export const NavigationBar = () => {
                     <span className="
                     self-center whitespace-nowrap text-xl font-bold 
                     text-gray-800 dark:text-white tracking-wide 
+                    font-space
                 ">
                         ZenFit
                     </span>
                 </NavbarBrand>
 
-                <div className="flex md:order-2">
+                <div className="flex md:order-2 font-inter">
                     <ThemeToggle />
 
                     <Dropdown
@@ -103,7 +103,7 @@ export const NavigationBar = () => {
                     <NavbarLink
                         as={Link}
                         to="/dashboard"
-                        className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
+                        className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition font-inter"
                     >
                         Dashboard
                     </NavbarLink>
