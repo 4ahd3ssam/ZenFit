@@ -13,6 +13,15 @@ export const Input = ({ className = "", ...props }) => {
                 focus:outline-none
                 focus:ring-2 focus:ring-orange-400/40
                 focus:border-orange-400
+                
+                dark:autofill:[-webkit-text-fill-color:white]
+                dark:autofill:[-webkit-box-shadow:0_0_0px_1000px_rgb(24_24_27)_inset]
+                dark:autofill:[box-shadow:0_0_0px_1000px_rgb(24_24_27)_inset]
+
+                dark:autofill:border-zinc-800
+                dark:autofill:bg-zinc-900
+
+                [transition:background-color_9999s_ease-in-out_0s]
                 dark:focus:border-orange-500 ${className}`}
             {...props} />
     )
