@@ -40,7 +40,7 @@ export const Landing = () => {
                                 Personalized workouts, an always-on AI coach, and progress tracking that actually keeps you coming back.
                             </p>
                             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                                <Link to={user ? "/workout" : "/register"}>
+                                <Link to={user ? "/workout" : "/signup"}>
                                     <Button size="lg" className="h-12 px-8 shadow-glow transition-transform hover:scale-105">
                                         <Flame className="mr-2 h-4 w-4" />
                                         {user ? "Generate workout" : "Start training free"}
@@ -85,7 +85,7 @@ export const Landing = () => {
                     <Card className="overflow-hidden border-0 bg-linear-to-br from-orange-600 to-orange-400 p-10 text-center shadow-glow md:p-16">
                         <h2 className="font-space text-3xl font-bold text-white dark:text-zinc-950 md:text-5xl">Train smarter today.</h2>
                         <p className="text-inter mx-auto mt-3 max-w-md text-gray-50 dark:text-zinc-900">Join thousands building consistency with PulseForge.</p>
-                        <Link to={user ? "/workout" : "/register"} className="mt-8 inline-block">
+                        <Link to={user ? "/workout" : "/signup"} className="mt-8 inline-block">
                             <Button size="lg" variant="ghost" className="h-12 px-8 text-inter bg-white hover:bg-gray-300 dark:bg-zinc-900 dark:hover:bg-zinc-700">
                                 {user ? "Start a workout" : "Create your free account"}
                             </Button>
