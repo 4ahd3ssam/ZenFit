@@ -45,7 +45,7 @@ export const NavigationBar = () => {
                     </span>
                 </NavbarBrand>
 
-                <div className="flex md:order-2 font-inter">
+                <div className="flex md:order-2 font-inter gap-3">
                     <ThemeToggle />
 
                     {user && <Dropdown
