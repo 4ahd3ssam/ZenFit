@@ -21,19 +21,22 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 export const authListener = () => {
+  const { setUser } = useAuthStore.getState();
+
   onAuthStateChanged(auth, async (firebaseUser) => {
     if (firebaseUser) {
       const ref = doc(db, "users", firebaseUser.uid);
       const snap = await getDoc(ref);
       if (snap.exists()) {
-        useAuthStore.setState({
-          user: snap.data(),
+        setUser({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          photoURL: firebaseUser.photoURL,
+          ...snap.data(),
         });
       }
     } else {
-      useAuthStore.setState({
-        user: null,
-      });
+      setUser(null);
     }
   });
 };
