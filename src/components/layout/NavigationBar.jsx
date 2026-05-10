@@ -10,12 +10,18 @@ import {
     NavbarLink,
     NavbarToggle,
 } from "flowbite-react";
-import { Flame } from "lucide-react";
+import { Flame, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "../../features/theme/ThemeToggle";
 import { FavIcon } from "../common/FavIcon";
+import { useAuthStore } from "../../store/authStore";
+import { useState } from "react";
+import { DialogModal } from "../common/DialogModal";
 
 export const NavigationBar = () => {
+    const { user, logout } = useAuthStore()
+    const [openLogout, setOpenLogout] = useState(false);
+
     return (
         <div className="transition-all duration-200">
             <Navbar
@@ -42,7 +48,7 @@ export const NavigationBar = () => {
                 <div className="flex md:order-2 font-inter">
                     <ThemeToggle />
 
-                    <Dropdown
+                    {user && <Dropdown
                         arrowIcon={false}
                         inline
                         placement="bottom-end"
@@ -52,20 +58,19 @@ export const NavigationBar = () => {
                         !text-gray-800 dark:!text-white shadow-xl
                     "
                         label={
-                            <Avatar
-                                alt="User settings"
-                                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                rounded
-                                className="mx-2"
-                            />
+                            <div
+                                className="size-10 rounded-full flex items-center justify-center p-3 bg-orange-500 font-extrabold text-white dark:text-zinc-950"
+                            >
+                                {user.name[0]}
+                            </div>
                         }
                     >
-                        <DropdownHeader className="!bg-transparent">
+                        <DropdownHeader className="bg-transparent!">
                             <span className="block text-sm font-medium text-gray-800 dark:text-white">
-                                Bonnie Green
+                                {user.name}
                             </span>
                             <span className="block truncate text-xs text-gray-500 dark:text-zinc-400">
-                                name@flowbite.com
+                                {user.email}
                             </span>
                         </DropdownHeader>
 
@@ -91,47 +96,73 @@ export const NavigationBar = () => {
 
                         <DropdownDivider className="!bg-gray-200 dark:!bg-zinc-800" />
 
-                        <DropdownItem className="text-red-500 hover:!bg-red-500/10">
+                        <DropdownItem onClick={() => setOpenLogout(true)} className="text-red-500 hover:!bg-red-500/10">
                             Sign out
                         </DropdownItem>
-                    </Dropdown>
+                    </Dropdown>}
+                    {user && <button
+                        onClick={() => setOpenLogout(true)}
+                        className="flex items-center gap-2 px-3 py-3 rounded-full hover:bg-orange-500/10 dark:hover:bg-zinc-900 hover:cursor-pointer
+                        text-orange-500 dark:text-gray-200
+                        transition"
+                    >
+                        <LogOut />
+                    </button>}
 
                     <NavbarToggle className="text-orange-500 hover:bg-orange-500/10 hover:cursor-pointer dark:hover:bg-zinc-900" />
                 </div>
 
                 <NavbarCollapse>
-                    <NavbarLink
+                    {user && <NavbarLink
                         as={Link}
                         to="/dashboard"
                         className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition font-inter"
                     >
                         Dashboard
-                    </NavbarLink>
+                    </NavbarLink>}
 
-                    <NavbarLink
+                    {user && <NavbarLink
                         as={Link}
                         to="/workout"
                         className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
                     >
                         Workout
-                    </NavbarLink>
+                    </NavbarLink>}
 
-                    <NavbarLink
+                    {user && <NavbarLink
                         as={Link}
                         to="/habit-tracker"
                         className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
                     >
                         Habit Tracker
-                    </NavbarLink>
+                    </NavbarLink>}
 
-                    <NavbarLink
+                    {user && <NavbarLink
                         as={Link}
                         to="/profile"
                         className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
                     >
                         Profile
                     </NavbarLink>
+
+                    }
+                    {!user && <NavbarLink
+                        as={Link}
+                        to="/login"
+                        className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
+                    >
+                        Sign In
+                    </NavbarLink>}
+                    {!user && <NavbarLink
+                        as={Link}
+                        to="/signup"
+                        className="text-gray-600 dark:text-zinc-300 hover:text-orange-500! transition"
+                    >
+                        Sign Up
+                    </NavbarLink>}
+
                 </NavbarCollapse>
+                <DialogModal open={openLogout} onOpenChange={setOpenLogout} title="Logout" description="Are you sure you need to logout?" isButton={true} actionTitle="Logout" action={logout} />
             </Navbar>
         </div>
     );
